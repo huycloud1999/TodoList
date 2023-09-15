@@ -1,0 +1,41 @@
+.icon {
+  font-size: 24px;
+  color: #5e60ce;
+  padding: 7px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.5s ease;
+}
+.icon:hover {
+  color: white;
+  background-color: #5e60ce;
+  box-shadow: #8284fa 0px 5px 15px;
+}
+.iconAdd {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 2px;
+  border-radius: 50%;
+  font-size: 14px;
+}
+.iconItem {
+  color: white;
+  font-size: 20px;
+  transition: 0.3s ease;
+}
+.iconItem:hover {
+  color: #5e60ce;
+  transform: rotateY(180deg);
+  cursor: pointer;
+}
+.delete {
+  color: white;
+  font-size: 20px;
+  transition: 0.3s ease;
+}
+.delete:hover {
+  color: #e25858;
+  transform: rotateY(180deg);
+  cursor: pointer;
+}
