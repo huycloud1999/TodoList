@@ -47,7 +47,7 @@ function Container() {
       if (task.id === taskId) {
         return {
           ...task,
-          timeRemind:"",
+          timeRemind: "",
         };
       }
       return task;
@@ -98,6 +98,15 @@ function Container() {
       setListTask([]);
     }
   }, []);
+  const filteredTasks = listTask.filter((task) => {
+    if (filterStatus === "all") {
+      return true;
+    } else if (filterStatus === "done") {
+      return task.complete;
+    } else if (filterStatus === "doing") {
+      return !task.complete;
+    }
+  });
 
   return (
     <div className="bg-gray600 justify-center py-7 relative  ">
@@ -137,8 +146,8 @@ function Container() {
           </div>
           <div className="grid grid-cols-3 gap-2 text-gray-100">
             <button
-              className={`border-solid border-[1px] border-purpleDark bg-purpleDark px-3 py-1 rounded-[5px] hover:bg-purple duration-[0.3s] ease-in-out ${
-                filterStatus === "all" ? "bg-danger" : ""
+              className={`border-solid border-[1px] border-purpleDark bg-purpleDark px-3 py-1 rounded-[5px] hover:scale-[1.1] duration-75  ${
+                filterStatus === "all" ? "bg-red-400" : ""
               }`}
               onClick={() => handleFilterChange("all")}
             >
@@ -146,8 +155,8 @@ function Container() {
             </button>
 
             <button
-              className={`border-solid border-[1px] border-purpleDark bg-purpleDark px-3 py-1 rounded-[5px] hover:bg-purple duration-[0.3s] ease-in-out ${
-                filterStatus === "done" ? "bg-danger" : ""
+              className={`border-solid border-[1px] border-purpleDark bg-purpleDark px-3 py-1 rounded-[5px] hover:scale-[1.1] duration-[0.5s] ease-in-out ${
+                filterStatus === "done" ? "bg-red-400" : ""
               }`}
               onClick={() => handleFilterChange("done")}
             >
@@ -155,8 +164,8 @@ function Container() {
             </button>
 
             <button
-              className={`border-solid border-[1px] border-purpleDark bg-purpleDark px-3 py-1 rounded-[5px] hover:bg-purple duration-[0.3s] ease-in-out ${
-                filterStatus === "doing" ? "bg-danger" : ""
+              className={`border-solid border-[1px] border-purpleDark bg-purpleDark px-3 py-1 rounded-[5px] hover:scale-[1.1] duration-[0.5s] ease-in-out ${
+                filterStatus === "doing" ? "bg-red-400" : ""
               }`}
               onClick={() => handleFilterChange("doing")}
             >
@@ -166,8 +175,8 @@ function Container() {
         </div>
 
         <div className="max-h-screen h-full overflow-auto p-5">
-          {listTask.length > 0 ? (
-            listTask.map((item) => (
+          {filteredTasks.length > 0 ? (
+            filteredTasks.map((item) => (
               <Item
                 key={item.id}
                 name={item.name}
@@ -175,7 +184,7 @@ function Container() {
                 complete={item.complete}
                 onToggleComplete={() => handleToggleComplete(item.id)}
                 onDeleteTask={() => handleDeleteTask(item.id)}
-                onClearTime={()=>handleClearTime(item.id)}
+                onClearTime={() => handleClearTime(item.id)}
                 onSaveTime={(time) => handleSaveTime(item.id, time)} // Truyền thời gian và ID công việc vào Item
               />
             ))
